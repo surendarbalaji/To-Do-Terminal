@@ -5,8 +5,10 @@ object todo {
       case "help" => println("Running help command")
       case "create" => val writer = new Writer
                         writer.writeToFile(args.drop(1))
-      case "view" => val reader = new Reader
-                      reader.readFromFile()
+      case "view" => val displayer = new Displayer
+                      displayer.display()
+      case "complete" => val completer = new Completer
+                          completer.completeTask(args.drop(1))
 
     }
   }
