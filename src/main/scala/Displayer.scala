@@ -9,8 +9,19 @@ class Displayer {
 
     readJson.asObject.foreach { jsonObject =>
       jsonObject.toMap.foreach { case (key, value) =>
-        printf("|%-32s|%-32s|\n", key, value.asString.getOrElse("Not a string"))
-        println("+--------------------------------+--------------------------------+")
+        if (key == "activeTasks") {
+          value.asObject.foreach { activeTasks =>
+            activeTasks.toMap.foreach { case (task, description) =>
+              printf("|%-32s|%-32s|\n", "[ ] " + task, description.asString.getOrElse("Not a string"))
+              println("+--------------------------------+--------------------------------+")}
+          }
+        }
+        else
+          value.asObject.foreach { completedTasks =>
+            completedTasks.toMap.foreach { case (task, description) =>
+              printf("|%-32s|%-32s|\n", "[x] " + task, description.asString.getOrElse(""))
+              println("+--------------------------------+--------------------------------+")}
+          }
       }
     }
   }

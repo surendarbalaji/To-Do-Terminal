@@ -20,7 +20,8 @@ class Writer {
       return
     }
 
-    val newJson = readJson.deepMerge(Map(task -> description.asJson).asJson)
+    val cursor = readJson.hcursor.downField("activeTasks")
+    val newJson = cursor.withFocus(_.mapObject(_.add(task, description.asJson))).top.get
 
     fileHandler.writeToFile(newJson)
     println("Success, task has been created")

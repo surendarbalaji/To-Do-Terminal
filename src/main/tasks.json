@@ -1,5 +1,11 @@
 {
-  "MathsHomework" : "ThisIsAnotherTask",
-  "SpanishHomework" : "ThisIsATestTask",
-  "Test Homework" : "Something with spaces"
+  "activeTasks" : {
+    "MathsHomework" : "ThisIsATestTask",
+    "SpanishHomework" : "ThisIsATestTask",
+    "Test Homework" : "Something with spaces"
+  },
+  "completedTasks" : {
+    "PhysicsHomework" : "ThisIsACompletedTask",
+    "Further Maths" : "Another task with spaces"
+  }
 }

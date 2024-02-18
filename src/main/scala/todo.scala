@@ -9,7 +9,8 @@ object todo {
                       displayer.display()
       case "complete" => val completer = new Completer
                           completer.completeTask(args.drop(1))
-
+      case "delete" => val remover = new Remover
+                        remover.removeTask(args.drop(1))
     }
   }
 }

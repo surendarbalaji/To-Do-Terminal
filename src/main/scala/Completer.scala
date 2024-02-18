@@ -7,9 +7,11 @@ class Completer {
     val readJson = fileHandler.readFromFile()
 
     val cursor: HCursor = readJson.hcursor
-    val taskCursor: ACursor = cursor.downField(args(0))
+    val taskCursor: ACursor = cursor.downField("activeTasks").downField(args(0))
     if (taskCursor.succeeded) {
-      val newJson: Json = readJson.hcursor.downField(args(0)).delete.top.get
+      val description = taskCursor.as[String].getOrElse("")
+      val updatedJson: Json = cursor.downField("activeTasks").downField(args(0)).delete.top.get
+      val newJson = updatedJson.hcursor.downField("completedTasks").withFocus(_.mapObject(_.add(args(0), description.asJson))).top.get
       fileHandler.writeToFile(newJson)
     }
     else print("Task not found")

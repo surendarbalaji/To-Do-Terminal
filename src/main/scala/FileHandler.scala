@@ -1,8 +1,6 @@
 import io.circe.Json
 import io.circe.parser.parse
-
 import java.io.PrintWriter
-import io.circe.syntax._
 
 class FileHandler {
   def readFromFile(): Json = {
